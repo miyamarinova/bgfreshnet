@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Freshnet</title>
+    
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<body>
+
+<main>
+{% include 'partials/navbar.html' %}
+    {% block main_content %}
+    
+    {% endblock %}
+
+</main>
+
+</body>
+</html>
