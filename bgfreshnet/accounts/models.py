@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-class FreshNetUser(auth_models.AbstractBaseUser):
+from bgfreshnet.accounts.managers import FreshNetUserManager
+class FreshNetUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     PRODUCER = 1
     CONSUMER = 2
 
@@ -10,7 +11,6 @@ class FreshNetUser(auth_models.AbstractBaseUser):
         (PRODUCER, "Producer Account"),
         (CONSUMER, "Consumer Account")
     )
-
 
     email = models.EmailField(
         _("email"),
@@ -29,10 +29,10 @@ class FreshNetUser(auth_models.AbstractBaseUser):
         default=True,
     )
 
-    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True)
+    #role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True)
 
     USERNAME_FIELD = "email"
-
+    objects = FreshNetUserManager()
 
 
 # Create your models here.

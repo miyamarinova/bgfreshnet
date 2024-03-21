@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <!-- Start Login Section-->
+    <div class="login-register-div">
+        <div class="login-register-box">
+            <h2>Добре дошли отново в Свежа Мрежа!</h2>
+
+            <!-- Start Login Form-->
+            <form action="{% url 'login user' %}?next={{ next }}" method="post">
+                {{ form.as_p }}
+                <!-- Login Button-->
+                <button type="submit">Log in</button>
+                {% csrf_token %}
+            </form>
+            <!-- End Login Form -->
+
+        </div>
+        <div class="second-option">
+
+            <!-- Link to Register Page-->
+            <p>Don't have an account? <a href="{% url 'register user' %}">Register</a></p>
+        </div>
+    </div>
+    <!-- End Login Section-->
+
+{% endblock %}
