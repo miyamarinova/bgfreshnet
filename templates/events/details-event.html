@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+
+<div class="container">
+      {% if user.is_authenticated and user.is_superuser %}
+            <div class="personal">
+    <a href="{% url 'edit event' pk=event.pk %}">
+            <img class="edit-img"
+                  src="{% static 'images/pen-solid.svg' %}"
+                  alt="edit button"/>
+                   </a>
+
+        <a href="">
+                <img class="bin-img"
+                  src="{% static 'images/trash-solid.svg' %}"
+                  alt="edit button"/>
+        </a>
+</div>
+      {% endif %}
+
+    <h1>{{ event.event_name }}</h1>
+    <img src="{{ event.organised_by }}" alt="Article Image">
+    <h3>Кога: {{ event.date_of_event }}</h3>
+    <h3>Къде: {{ event.location }}</h3>
+
+    <p>{{ event.details }}</p>
+    <p>Цена за участие: {{ event.registration_fee }} лв</p>
+</div>
+    <a href="{% url 'all events' %}" class="btn btn-secondary mt-4">Към всички събития</a>
+
+{% endblock %}

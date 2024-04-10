@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+
+<div class="container">
+    <h1 class="mb-4">Нашите производители</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+        {% for producer in producers %}
+        <!-- Start Profile Personal Data Section -->
+        <div class="profile-data">
+          <div class="profile_img">
+            <div class="image">
+                {% if producer.profile.profile_picture %}
+              <!-- Profile Image -->
+              <img src="{{ producer.profile.profile_picture }}" alt="img8" />
+                {% else %}
+                 <img src="{% static 'images/user.png' %}" alt="img8" />
+                {% endif %}
+            <!-- Profile Details Link -->
+            <a href="{% url 'profile details' pk=producer.pk %}">{{ producer.name_farm }}</a>
+            </div>
+          </div>
+        </div>
+            <!-- Add other fields as needed -->
+        {% endfor %}
+</div>
+</div>
+{% endblock %}

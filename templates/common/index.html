@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 900px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <link href="{% static 'css/carousel.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block main_content %}
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <img src="{% static 'images/marketplace1.png' %}"><rect width="100%" height="100%" fill="#777"/>
+        </svg>
+
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Свежа Мрежа</h1>
+            <p>Виртуалният пазар на малкият и среден производител</p>
+              {% if request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'all products' %}">Пазар</a>
+                <a class="btn btn-success" href="{% url 'create product' %}">Добави нов продукт</a>
+              
+              {% else %}
+            <a class="btn  btn-success" href="{% url 'login user' %}">Влез</a>
+            <a class="btn  btn-primary" href="{% url 'register user' %}">Нов потребител</a>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item"> <img src="{% static 'images/marketplace3.jpg' %}">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        </svg>
+
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Запознайте се с производителите на Свежа Мрежа</h1>
+
+            <a class="btn btn-lg btn-primary" href="{% url 'list producers' %}">Производители</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="90%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <img src="{% static 'images/beekeper.png' %}">
+            <rect width="100%" height="100%" fill="#777"/>
+        </svg>
+          
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="container marketing">
+
+    <!-- Carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+
+        <h2>Новини</h2>
+        <p>Важна и интересна информация, която ще ви обогати, накара да се замислите или просто ще ви усмихне.</p>
+        <p><a class="btn btn-secondary" href="{% url 'all articles' %}">Виж още &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+
+        <h2>Събития</h2>
+        <p>Обмяна на опит и знания. Удоволствието от това да си част от общност с общи интереси, възможността да се докоснеш отблизо до производителите и тяхната работа.</p>
+        <p><a class="btn btn-secondary" href="#">Виж още &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+
+        <h2>Нашата мисия</h2>
+        <p>Запознайте се с нашия екип и с нашата мисия.</p>
+        <p><a class="btn btn-secondary" href="{% url 'about-us' %}">Виж още &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- Highlights -->
+
+    <hr class="featurette-divider">
+
+        {% include 'common/highlight.html' %}
+
+
+
+{% endblock %}

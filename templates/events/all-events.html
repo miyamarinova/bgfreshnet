@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="container">
+    <h1 class="mb-4">Събития</h1>
+    <div class="row">
+    {% if events %}
+        {% for event in events %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="" class="card-img-top" alt="Event Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.event_name }}</h5>
+                    <p class="card-text">{{ event.details }}</p>
+                    <p class="card-text"><strong>Date:</strong>{{ event.date_of_event }}</p>
+                    <p class="card-text"><strong>Location:</strong> location</p>
+                    <a href="{% url 'details event' pk=event.pk %}" class="btn btn-primary">Повече информация</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h1>Няма предствоящи събития</h1>
+    {% endif %}
+
+        {% if user.is_authenticated and user.is_superuser %}
+        <a class="btn btn-success" href="{% url 'add event' %}">Добави събитие</a>
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}

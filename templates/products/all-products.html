@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+<div class="container">
+    <h1 class="mb-4">Marketplace</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+        <!-- Example product cards -->
+        {% for product in products %}
+        <div class="col">
+            <div class="card product-card">
+                <img src="{{ product.product_image }}" class="card-img-top product-image" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <a href="{% url 'product-details' pk=product.pk %}" class="btn btn-primary">View Product</a>
+                    <p class="added-by">Added By: {{ product.user.name_farm }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- Repeat this card structure for each product -->
+    </div>
+</div>
+{% endblock %}

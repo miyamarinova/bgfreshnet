@@ -1,0 +1,27 @@
+
+{% load static %}
+<div class="personal">
+<div class="edit">
+<div class="row featurette">
+      <div class="col-md-7">
+
+
+      {% for event in events %}
+
+         <h2 class="featurette-heading"><span class="text-muted">Април</span> е цветен и благоуханен!</h2>
+          <p class="lead"><p class="lead">{{ event.details }}</p>
+          <p><a href="{% url 'details event' pk=event.pk %}" class="btn btn-secondary">Повече информация</a></p>
+      </div>
+            </div>
+
+        </div>
+      <div class="col-md-5">
+            <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500"
+                 src="{% static 'images/flowerworkshop.png' %}">
+            <rect width="100%" height="100%" fill="#eee"/>
+      </div>
+    </div>
+    <hr class="featurette-divider">
+
+{% endfor %}
+

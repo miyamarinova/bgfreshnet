@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%  block main_content %}
+
+  <!-- Start Add Pet Section-->
+    <div class="edit-delete edit-photo">
+        <h2>Create New Product</h2>
+    <form action="{% url 'create product' %}" method="post">
+            {{ form.as_p }}
+        <button class="add-btn" type="submit">Create</button>
+        {%  csrf_token %}
+    </form>
+    </div>
+    <!-- End Add Pet Section -->
+
+{% endblock %}

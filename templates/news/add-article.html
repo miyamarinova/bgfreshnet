@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%  block main_content %}
+
+  <!-- Start Add Pet Section-->
+    <div class="edit-delete edit-photo">
+        <h2>Добави статия</h2>
+    <form action="{% url 'add article' %}" method="post">
+            {{ form.as_p }}
+        <button class="add-btn" type="submit">Добави</button>
+        {%  csrf_token %}
+    </form>
+    </div>
+    <!-- End Add Pet Section -->
+
+{% endblock %}

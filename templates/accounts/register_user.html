@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+     <style>
+        body {
+            background-color: #fafafa;
+        }
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #007bff;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #007bff;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .login-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-divider::before, .login-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        .login-divider::before {
+            margin-right: 10px;
+        }
+        .login-divider::after {
+            margin-left: 10px;
+        }
+    </style>
+    
+    <div class="container">
+
+    <div class="login-divider"></div>
+    <div class="form-container">
+        <h2>Register</h2>
+       <form action="{% url 'register user' %}" method="post">
+                {{ form.as_p }}
+                <!-- Register Button -->
+                <button type="submit">Създай</button>
+                {% csrf_token %}
+                
+            </form>
+         <div class="second-option">
+
+            <!-- Link to Login Page -->
+            <p>Have an account? <a href="{% url 'login user' %}">Log in</a></p>
+        </div>
+    </div>
+</div>
+
+    <!-- End Register Section -->
+{% endblock %}
+
+
+</body>
+</html>

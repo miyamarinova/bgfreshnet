@@ -1,0 +1,31 @@
+{% load static %}
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Freshnet</title>
+     <!-- Bootstrap CSS -->
+     {% bootstrap_css %}
+    <!-- Custom CSS styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block style %}
+    
+    {% endblock %}
+</head>
+
+<body>
+
+<main>
+    {% include 'partials/navbar.html' %}
+    
+    {% block main_content %}
+    
+    {% endblock %}
+
+    {% include 'partials/footer.html' %}
+
+</main>
+     {% bootstrap_javascript %}
+</body>
+</html>

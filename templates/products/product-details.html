@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ product.product_image }}" alt="{{ product.name }}" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h1>{{ product.name }}</h1>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                {% if request.user.name_farm == product.user.name_farm %}
+                    <p>Added by: Me </p>
+                {% else %}
+                    <p>Added by: {{ product.user.name_farm }}</p>
+                {% endif %}
+                <!-- Add more details as needed -->
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

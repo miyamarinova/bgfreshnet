@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+
+    <div class="container-aboutus">
+    <h1 class="section-title-aboutus">About Us</h1>
+    <div class="section-content-aboutus">
+        <p>Welcome to our marketplace platform for local farmers! Our mission is to connect farmers with consumers, providing fresh and locally sourced produce.</p>
+        <p>At our platform, you can discover a wide variety of farm-fresh products, ranging from fruits and vegetables to dairy and meat products. We prioritize sustainability and supporting local communities.</p>
+        <p>Our team is passionate about promoting sustainable agriculture and fostering relationships between farmers and consumers. We believe in transparency and traceability, ensuring that you know exactly where your food comes from.</p>
+        <p>Join us in supporting local farmers and enjoying the freshest produce straight from the farm to your table!</p>
+    </div>
+    <div class="container">
+    <h1 class="section-title">Our Goals</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="goal-card">
+                <img src="{% static 'images/aboutuskid.png' %}" class="goal-image" alt="Promote Sustainable Agriculture">
+                <h2 class="goal-title">Promote Sustainable Agriculture</h2>
+                <p class="goal-description">We aim to promote sustainable agricultural practices that prioritize environmental conservation, biodiversity, and soil health.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="goal-card">
+                <img src="{% static 'images/localfarmmarket.png' %}" class="goal-image" alt="Support Local Farmers">
+                <h2 class="goal-title">Support Local Farmers</h2>
+                <p class="goal-description">We strive to support local farmers by providing them with a platform to sell their produce directly to consumers, ensuring fair prices and promoting economic sustainability.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="goal-card">
+                <img src="{% static 'images/beekeper.png' %}" class="goal-image" alt="Foster Community Engagement">
+                <h2 class="goal-title">Foster Community Engagement</h2>
+                <p class="goal-description">We seek to foster community engagement and education about the importance of sustainable agriculture, local food systems, and the benefits of consuming fresh, locally sourced products.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
