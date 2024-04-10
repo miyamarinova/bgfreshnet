@@ -64,7 +64,7 @@
       </div>
       <div class="carousel-item">
         <svg class="bd-placeholder-img" width="90%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <img src="{% static 'images/beekeper.png' %}">
+            <img src="{% static 'images/workshop.png' %}">
             <rect width="100%" height="100%" fill="#777"/>
         </svg>
           
@@ -85,21 +85,27 @@
     <!-- Carousel -->
     <div class="row">
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <img src="{% static 'images/organic-market.png' %}" class="bd-placeholder-img rounded-circle" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 150x150" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+          <rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text>
 
         <h2>Новини</h2>
         <p>Важна и интересна информация, която ще ви обогати, накара да се замислите или просто ще ви усмихне.</p>
         <p><a class="btn btn-secondary" href="{% url 'all articles' %}">Виж още &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
+
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <img src="{% static 'images/workshop.png' %}" class="bd-placeholder-img rounded-circle" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 150x150" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text>
 
         <h2>Събития</h2>
         <p>Обмяна на опит и знания. Удоволствието от това да си част от общност с общи интереси, възможността да се докоснеш отблизо до производителите и тяхната работа.</p>
-        <p><a class="btn btn-secondary" href="#">Виж още &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="{% url 'all events' %}">Виж още &raquo; &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+       <img src="{% static 'images/ducks.png' %}" class="bd-placeholder-img rounded-circle" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 150x150" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+          <rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text>
 
         <h2>Нашата мисия</h2>
         <p>Запознайте се с нашия екип и с нашата мисия.</p>
@@ -113,7 +119,6 @@
     <hr class="featurette-divider">
 
         {% include 'common/highlight.html' %}
-
 
 
 {% endblock %}

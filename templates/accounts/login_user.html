@@ -65,7 +65,7 @@
 
     <div class="login-divider"></div>
     <div class="form-container">
-        <h2>Log In</h2>
+        <h2>Влез в профил</h2>
        <form action="{% url 'login user' %}" method="post">
                 {{ form.as_p }}
                 <!-- Register Button -->
@@ -76,7 +76,7 @@
          <div class="second-option">
 
             <!-- Link to Login Page -->
-            <p>Have an account? <a href="{% url 'register user' %}">Register</a></p>
+            <p>Не си наш потребител? <a href="{% url 'register user' %}">Направи Нов профил</a></p>
         </div>
     </div>
 </div>
