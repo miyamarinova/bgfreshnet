@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+     <div class="container">
+
+         <h1>Изтрий продукт</h1>
+         <p>На път си да изтриеш продукт: {{ product.name }}</p>
+         <p>{{ product.user.farm_name }} </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Изтрий</button>
+    </form>
+</div>
+
+
+{% endblock %}

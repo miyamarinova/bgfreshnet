@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-
 from bgfreshnet.events.decorators import admin_group_required
 from bgfreshnet.events.forms import EventCreateForm, EventBaseForm
 from bgfreshnet.events.models import Event

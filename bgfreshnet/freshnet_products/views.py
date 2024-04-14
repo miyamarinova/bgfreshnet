@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
-from bgfreshnet.freshnet_products.forms import ProductCreateForm
-from bgfreshnet.freshnet_products.models import FreshNetProduct
 
+from bgfreshnet.freshnet_products.decorators import admin_group_required, has_delete_permission
+from bgfreshnet.freshnet_products.forms import ProductCreateForm, ProductBaseForm
+from bgfreshnet.freshnet_products.models import FreshNetProduct
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 class ProductCreateView(views.CreateView):
@@ -27,3 +30,19 @@ class ProductDetailsView(views.DetailView):
     model = FreshNetProduct
     template_name = 'products/product-details.html'  # Specify the template for product details
     context_object_name = 'product'  # Specify the context variable name to use in the template
+
+@method_decorator(admin_group_required, name='dispatch')
+@method_decorator(user_passes_test(has_delete_permission), name='dispatch')
+class EditProductView(views.UpdateView):
+    model = FreshNetProduct
+    form_class = ProductBaseForm
+    template_name = 'products/edit-product.html'  # Update with your actual template name
+    success_url = reverse_lazy('product-details')
+
+@method_decorator(admin_group_required, name='dispatch')
+@method_decorator(user_passes_test(has_delete_permission), name='dispatch')
+class DeleteProductView(views.DeleteView):
+        model = FreshNetProduct  # Specify the model
+        template_name = 'products/delete-product.html'
+        success_url = reverse_lazy('all products')
+        context_object_name = 'product'

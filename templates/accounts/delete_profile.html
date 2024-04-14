@@ -2,7 +2,7 @@
 
 {% block main_content %}
      <div class="container">
-    <h1>Delete Profile</h1>
+    <h1>Изтрий профил</h1>
          <p>На път си да изтриеш профил: {{ profile.email }}</p>
          <p>{{ profile.user.first_name }}</p>
          <p>{{ profile.user.last_name }}</p>
@@ -10,7 +10,7 @@
         <p>с {{ profile.user.products.count }} качени продукта за продажба?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Delete</button>
+        <button type="submit">Изтрий</button>
     </form>
 </div>
 
