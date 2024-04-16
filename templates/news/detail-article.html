@@ -3,9 +3,28 @@
 {% block main_content %}
 
 <div class="container">
+<a href="{% url 'all articles'%}" class="btn btn-sm btn-outline-primary">Към всички новини</a>
+{% if user.is_authenticated and user.is_superuser %}
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'edit article' pk=article.pk %}" class="btn btn-sm btn-outline-primary">Редактирай</a>
+                                    </div>
+                                    <div class="col text-right">
+                                        <form action="{% url 'delete article' pk=article.pk %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Изтрий</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
     <h1>{{ article.title }}</h1>
     <img src="{{ article.article_image }}" alt="Article Image">
     <p>{{ article.content }}</p>
+
 </div>
+
 
 {% endblock %}

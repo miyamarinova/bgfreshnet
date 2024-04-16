@@ -8,7 +8,6 @@ body {
   color: #5a5a5a;
 }
 
-
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -27,13 +26,15 @@ body {
   height: 32rem;
 }
 .carousel-item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 100rem;
-}
 
+  width: 100%; /* Add this line */
+  height: auto; /* Add this line */
+}
+.carousel-caption p {
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -91,3 +92,4 @@ body {
     margin-top: 7rem;
   }
 }
+

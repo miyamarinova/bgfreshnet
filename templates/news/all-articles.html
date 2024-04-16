@@ -5,51 +5,45 @@
 <div class="container">
     <h1 class="mb-4">Новини</h1>
     <div class="row">
-    {% if articles %}
-        {% for article in articles %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="{{ article.article_image }}" class="card-img-top" alt="Article Image">
-                <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
-                    <p class="card-text">{{ article.content|truncatechars:100 }}</p>
-                    <a href="{% url 'detail article' pk=article.pk %}" class="btn btn-primary">Прочети още</a>
-
-                    <div class="personal">
-
+        {% if articles %}
+            {% for article in articles %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ article.article_image }}" class="card-img-top" alt="Article Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.content|truncatechars:100 }}</p>
+                            <a href="{% url 'detail article' pk=article.pk %}" class="btn btn-primary">Прочети още</a>
+                        </div>
                         {% if user.is_authenticated and user.is_superuser %}
-            <div class="edit">
-                   <a href="">
-            <img
-                  class="edit-img"
-                  src="{% static 'images/pen-solid.svg' %}"
-                  alt="edit button"
-                /></a>
-              </a>
-
-        <a href="">
-                <a href=""><img
-                  class="edit-img"
-                  src="{% static 'images/trash-solid.svg' %}"
-                  alt="edit button"
-                /></a>
-              </a>
-                </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'edit article' pk=article.pk %}" class="btn btn-sm btn-outline-primary">Редактирай</a>
+                                    </div>
+                                    <div class="col text-right">
+                                        <form action="{% url 'delete article' pk=article.pk %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Изтрий</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Няма добавени новини.
+                </div>
             </div>
-
-        </div>
-        {% endfor %}
-    {% else %}
-        <h2>Няма добавени новини</h2>
-    {% endif %}
-
-        {% if user.is_authenticated and user.is_superuser %}
-        <a class="btn btn-success" href="{% url 'add article' %}">Добави новина</a>
-    {% endif %}
-
-
+        {% endif %}
     </div>
+    {% if user.is_authenticated and user.is_superuser %}
+        <a class="btn btn-success mt-4" href="{% url 'add article' %}">Добави новина</a>
+    {% endif %}
 </div>
-
 {% endblock %}
+<div></div

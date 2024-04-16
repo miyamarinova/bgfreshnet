@@ -1,97 +1,118 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_content %}
-  <!-- Start Profile Details Section -->
-      <div class="profile">
 
-        <!-- Start Profile Personal Data Section -->
-        <div class="profile-data">
-          <div class="profile_img">
-            <div class="image">
-                {% if profile.profile_picture %}
-              <!-- Profile Image -->
-                    <img src="{{ profile.profile_picture }}" alt="img8" />
-                {% else %}
-                 <img src="{% static 'images/user.png' %}" alt="img8" />
-                {% endif %}
-            </div>
-          </div>
-          <div class="personal">
-            <div class="edit">
-              <!-- User Username -->
-                <p>{{ profile.user.name_farm }}</p>
-
-              <!-- IF the viewer is the owner of the profile -->
-              
-                <!-- Link to Edit Profile Page -->
-                {% if object.pk == request.user.pk %}
-              <a href="">
-                <a href="{% url 'profile update' %}">
-                    <img
-                  class="edit-img"
-                  src="{% static 'images/pen-solid.svg' %}"
-                  alt="edit button"
-                /></a>
-              </a>
-                    <!-- Link to Delete Profile Page -->
-                    <a href="">
-                <a href="{% url 'delete profile' pk=object.pk %}"><img
-                  class="edit-img"
-                  src="{% static 'images/trash-solid.svg' %}"
-                  alt="edit button"
-                /></a>
-              </a>
-                    <a href="">
-                <a href="{% url 'create product' %}"><img
-                  class="edit-img" style="width: 40px; height: 40px;"
-                  src="{% static 'images/carrot-solid.svg' %}"
-                  alt="edit button"
-                /></a>
-              </a>
-                {% endif %}
-            </div>
-            <div class="data">
-
-              <!-- Total Number of Products by the Producer -->
-              <span>{{ user.products.count }}</span>
-              <p>продукта</p>
-
-              <!-- TO DO: functionality about rating (liked products) -->
-            </div>
-
-              <!-- User First and Last Name IF Added -->
-          {% if object.first_name %}
-            <h3 class="names">{{ object.first_name }}</h3>
-            {% endif %}
-          
-            <!-- User Email Address -->
-            <p class="email">{{ object.user.email}}</p>
-          </div>
-        </div>
-
-        <!-- End Profile Personal Data Section -->
-
-          <div class="short bio">
-              <p>
-                  {{ profile.short_bio }}
-              </p>
-          </div>
-           
-            {% for product in products %}
-        <div class="col">
-            <div class="card product-card">
-                <img src="{{ product.product_image }}" class="card-img-top product-image" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
-                    <a href="{% url 'product-details' pk=product.pk %}" class="btn btn-primary">View Product</a>
-                    <p class="added-by">Производител: {{ product.user.name_farm }}</p>
-                </div>
-            </div>
-        </div>
-            {% empty %}
-                <h2>Няма добавени продукти.</h2>
-        {% endfor %}
-        
+    <div class="container">
+  <div class="profile-data">
+    <div class="profile_img">
+      <div class="image">
+        {% if profile.profile_picture %}
+        <!-- Profile Image -->
+        <img src="{{ profile.profile_picture }}" alt="img8" />
+        {% else %}
+        <img src="{% static 'images/user.png' %}" alt="img8" />
+        {% endif %}
       </div>
+    </div>
+    <div class="personal">
+      <div class="edit">
+        <!-- User Username -->
+        <p>{{ profile.user.name_farm }}</p>
+
+        <!-- IF the viewer is the owner of the profile -->
+
+        <!-- Link to Edit Profile Page -->
+        {% if object.pk == request.user.pk %}
+
+        <a href="">
+          <a href="{% url 'profile update' %}">
+            <img
+              class="edit-img"
+              src="{% static 'images/pen-solid.svg' %}"
+              alt="edit button"
+            /></a>
+        </a>
+        <!-- Link to Delete Profile Page -->
+        <a href="">
+          <a href="{% url 'delete profile' pk=object.pk %}"><img
+              class="edit-img"
+              src="{% static 'images/trash-solid.svg' %}"
+              alt="edit button"
+            /></a>
+        </a>
+        <a href="">
+          <a href="{% url 'create product' %}"><img
+              class="edit-img" style="width: 40px; height: 40px;"
+              src="{% static 'images/carrot-solid.svg' %}"
+              alt="edit button"
+            /></a>
+        </a>
+        {% endif %}
+        {% if user.is_superuser %}
+        <a href="">
+          <a href="{% url 'delete profile' pk=object.pk %}"><img
+              class="edit-img"
+              src="{% static 'images/trash-solid.svg' %}"
+              alt="edit button"
+            /></a>
+        </a>
+        {% endif %}
+      </div>
+      <div class="data">
+
+        <!-- Total Number of Products by the Producer -->
+        <span>{{ user.products.count }}</span>
+        <p>продукта</p>
+
+        <!-- TO DO: functionality about rating (liked products) -->
+      </div>
+
+      <!-- User First and Last Name IF Added -->
+      {% if object.first_name %}
+      <h3 class="names">{{ object.first_name }}</h3>
+      {% endif %}
+
+      <!-- User Email Address -->
+      <p class="email">{{ object.user.email}}</p>
+    </div>
+  </div>
+
+  <!-- End Profile Personal Data Section -->
+
+  <div class="short-bio" style=" margin-right: 50px;
+    margin-left: 50px;">
+    <p>
+      {{ profile.short_bio }}
+    </p>
+  </div>
+
+  <div class="container">
+    <h1 class="mb-4">Пазар</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+      <!-- Product cards -->
+      {% for product in products %}
+      <div class="col">
+        <div class="card product-card">
+          <img src="{{ product.product_image }}" class="card-img-top product-image" alt="Product Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <a href="{% url 'product-details' pk=product.pk %}" class="btn btn-primary">Виж продукт</a>
+
+              {% if product.user == request.user %}
+                <p class="added-by" style="font-weight: bold; color: #333;">Мой продукт</p>
+              {% else %}
+                <p class="added-by" style="font-weight: bold; color: #333;">Производител: {{ product.user.name_farm }}</p>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col">
+        <h2 class="text-center">Няма добавени продукти.</h2>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

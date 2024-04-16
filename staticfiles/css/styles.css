@@ -392,3 +392,16 @@
 .step-links a:hover {
     text-shadow: none;
 }
+
+
+
+body {
+    margin-bottom: 60px; /* Adjust based on footer height */
+}
+
+.footer {
+    background-color: #333; /* Adjust as needed */
+    color: #fff; /* Adjust as needed */
+    padding: 20px 0;
+    width: 100%;
+}

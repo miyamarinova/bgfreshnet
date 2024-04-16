@@ -39,6 +39,10 @@ class EditProductView(views.UpdateView):
     template_name = 'products/edit-product.html'  # Update with your actual template name
     success_url = reverse_lazy('product-details')
 
+    def test_func(self):
+        product = self.get_object()
+        return self.request.user == product.user or self.request.user.is_superuser
+
 @method_decorator(admin_group_required, name='dispatch')
 @method_decorator(user_passes_test(has_delete_permission), name='dispatch')
 class DeleteProductView(views.DeleteView):

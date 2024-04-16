@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block main_content %}
-     <style>
-        body {
-            background-color: #fafafa;
-        }
+  {% block style %}
+<style>
+    body {
+        background-image: url("{% static 'images/shoppingmesh.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(255, 255, 255, 0.9);
+        min-height: 100vh;
+        position: relative;
+    }
         .container {
-            max-width: 400px;
-            margin: 100px auto;
+            max-width: 600px;
+
         }
         .form-container {
             background-color: #fff;
@@ -15,9 +22,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
+
         .form-group label {
             font-weight: bold;
         }
@@ -31,48 +36,49 @@
         .form-group input:focus {
             border-color: #007bff;
         }
-        .btn-primary {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #007bff;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        .login-divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .login-divider::before, .login-divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #ddd;
-        }
-        .login-divider::before {
-            margin-right: 10px;
-        }
-        .login-divider::after {
-            margin-left: 10px;
-        }
-    </style>
-    
-    <div class="container">
 
-    <div class="login-divider"></div>
+
+        </style>
+ {% endblock %}
+
+    {% block main_content %}
+    <div class="container">
     <div class="form-container">
         <h2>Нов потребител</h2>
-       <form action="{% url 'register user' %}" method="post">
-                {{ form.as_p }}
-                <!-- Register Button -->
-                <button type="submit">Създай</button>
-                {% csrf_token %}
-                
-            </form>
+       <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_content">Email:</label>
+                {{ form.email }}
+            </div>
+
+           <div class="form-group">
+                <label for="id_content">Собствено име:</label>
+                {{ form.first_name }}
+            </div>
+
+           <div class="form-group">
+                <label for="id_content">Фамилно име:</label>
+                {{ form.last_name }}
+            </div>
+
+           <div class="form-group">
+                <label for="id_content">Име на фирма/ферма:</label>
+                {{ form.name_farm }}
+            </div>
+
+           <div class="form-group">
+                <label for="id_content">Парола:</label>
+                {{ form.password1 }}
+            </div>
+
+           <div class="form-group">
+                <label for="id_content">Повтори парола:</label>
+                {{ form.password2 }}
+            </div>
+
+    <button type="submit" class="btn btn-primary">Обнови</button>
+</form>
          <div class="second-option">
 
             <!-- Link to Login Page -->
