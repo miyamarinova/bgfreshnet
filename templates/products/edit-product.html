@@ -1,5 +1,34 @@
 {% extends 'base.html' %}
-
 {% block main_content %}
+{% load static %}
+
+    <div class="container mt-5">
+        {% if product.user == user %}
+            <hr>
+            <form action="{% url 'delete product' product.id %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete Product</button>
+            </form>
+            <a href="{% url 'edit product' product.id %}" class="btn btn-warning">Edit Product</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ product.product_image }}" alt="{{ product.name }}" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h1>{{ product.name }}</h1>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                {% if product.user == user %}
+                    <p>Добавено от: Me</p>
+                {% else %}
+                    <p>Added by: {{ product.user.name_farm }}</p>
+                {% endif %}
+                <!-- Add more details as needed -->
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

@@ -50,3 +50,26 @@ class DeleteProductView(views.DeleteView):
         template_name = 'products/delete-product.html'
         success_url = reverse_lazy('all products')
         context_object_name = 'product'
+
+@method_decorator(admin_group_required, name='dispatch')
+class EditProductView(views.UpdateView):
+    model = FreshNetProduct
+    form_class = ProductBaseForm
+    template_name = 'products/edit-product.html'
+    context_object_name = 'product'
+
+    def dispatch(self, request, *args, **kwargs):
+        product = self.get_object()
+        if not request.user == product.user and not request.user.is_superuser:
+            return render(request, '403.html', status=403)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('product-details', kwargs={'pk': self.object.pk})
+
+@method_decorator(admin_group_required, name='dispatch')
+class DeleteProductView(views.DeleteView):
+    model = FreshNetProduct
+    template_name = 'products/delete-product.html'
+    success_url = reverse_lazy('all products')
+    context_object_name = 'product'

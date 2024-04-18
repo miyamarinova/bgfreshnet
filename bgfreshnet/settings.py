@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bgfreshnet.accounts',
     'bgfreshnet.freshnet_products',
-    'bgfreshnet.photos',
     'bgfreshnet.core',
     'bgfreshnet.common',
     'bgfreshnet.events',
@@ -132,3 +131,11 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'miyamarinova@gmail.com'
+EMAIL_HOST_PASSWORD = 'Pa6murdagi'  # Your Gmail email password or app password
+EMAIL_USE_TLS = True

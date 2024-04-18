@@ -18,3 +18,4 @@ class ProductBaseForm(forms.ModelForm):
 
 class ProductCreateForm(ProductBaseForm):
     pass
+
