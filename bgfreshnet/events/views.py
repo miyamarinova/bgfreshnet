@@ -11,16 +11,11 @@ class AllEventsView(views.ListView):
     template_name = 'events/all-events.html'
     context_object_name = 'events'
 
-@method_decorator(admin_group_required, name='dispatch')
 class AddEventView(views.CreateView):
     model = Event
     form_class = EventCreateForm
     template_name = 'events/add-event.html'
     success_url = reverse_lazy('all events')
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
 
 class DetailsEventView(views.DetailView):
     model = Event

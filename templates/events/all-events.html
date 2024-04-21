@@ -12,9 +12,9 @@
                 <img src="{{ event.event_image}}" class="card-img-top" alt="Event Image">
                 <div class="card-body">
                     <h5 class="card-title">{{ event.event_name }}</h5>
-                    <p class="card-text">{{ event.details }}</p>
+                    <p class="card-text">{{ event.details | truncatechars_html:200 | linebreaksbr }}</p>
                     <p class="card-text"><strong>Date:</strong>{{ event.date_of_event }}</p>
-                    <p class="card-text"><strong>Location:</strong> location</p>
+                    <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
                     <a href="{% url 'details event' pk=event.pk %}" class="btn btn-primary">Повече информация</a>
                 </div>
             </div>

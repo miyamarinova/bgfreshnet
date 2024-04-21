@@ -11,12 +11,12 @@ class Event(models.Model):
     )
 
     organised_by = models.TextField(
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
-    date_of_event = models.DateTimeField(
-        auto_now_add=False,
+    date_of_event = models.CharField(
+
         null=False,
         blank=False,
     )

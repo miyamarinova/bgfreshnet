@@ -1,16 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_content %}
+    <style>
+
+body {
+        background-image: url("{% static 'images/shoppingmesh.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(255, 255, 255, 0.9);
+        min-height: 100vh;
+        position: relative;
+    }
+</style>
 <div class="container">
+<div class="form-container">
     <div class="row mt-5">
-        <div class="col-md-6 offset-md-3">
-            <h2>Сържи се с нас</h2>
+        <div class="col-md-4 offset-md-3">
+            <h2>Свържи се с нас</h2>
+            <p><strong>Owner:</strong> Мария-Йоана Маринова</p>
+            <p><strong>Email:</strong> miyamarinova@gmail.com</p>
+            <p><strong>Phone:</strong> +1 (123) 456-789</p>
+            <p><strong>Address:</strong> 123 Нашата улица, Нашият град, България</p>
+        </div>
+
             {% if email_sent %}
             <div class="alert alert-success" role="alert">
                 Благодарим ти за съобщението! Ще се свържем с в най-кратък срок! До скоро!
             </div>
             {% endif %}
-            <form action="{% url 'contact us' %}" method="post" role="form">
+            <form action="https://opensource.com/." method="post" role="form">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="name" class="form-label">Твоето име</label>
@@ -28,14 +47,8 @@
             </form>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-md-6 offset-md-3">
-            <h2>Свържи се с нас</h2>
-            <p><strong>Owner:</strong> Мария-Йоана Маринова</p>
-            <p><strong>Email:</strong> miyamarinova@gmail.com</p>
-            <p><strong>Phone:</strong> +1 (123) 456-789</p>
-            <p><strong>Address:</strong> 123 Нашата улица, Нашият град, България</p>
-        </div>
+
     </div>
-</div>
+
+    </div>
 {% endblock %}

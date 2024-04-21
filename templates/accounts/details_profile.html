@@ -74,6 +74,9 @@
 
       <!-- User Email Address -->
       <p class="email">{{ object.user.email}}</p>
+    {% if profile.phone_number %}
+        <p class="email">Тел. за връзка: {{ profile.phone_number }}</p>
+    {% endif %}
     </div>
   </div>
 

@@ -57,11 +57,6 @@ body {
 
 /* Featurettes
 ------------------------- */
-
-.featurette-divider {
-  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
-}
-
 /* Thin out the marketing headings */
 .featurette-heading {
   font-weight: 300;
@@ -89,7 +84,6 @@ body {
 
 @media (min-width: 62em) {
   .featurette-heading {
-    margin-top: 7rem;
   }
 }
 

@@ -1,16 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+<style>
 
-{%  block main_content %}
+body {
+        background-image: url("{% static 'images/shoppingmesh.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(255, 255, 255, 0.9);
+        min-height: 100vh;
+        position: relative;
+    }
+</style>
 
-  <!-- Start Add Pet Section-->
-    <div class="edit-delete edit-photo">
+<!-- Start Add Event Section-->
+<div class="container">
+    <div class="form-container">
         <h2>Добави събитие</h2>
-    <form action="{% url 'add event' %}" method="post">
-            {{ form.as_p }}
-        <button class="add-btn" type="submit">Добави</button>
-        {%  csrf_token %}
-    </form>
-    </div>
-    <!-- End Add Pet Section -->
+        <form action="{% url 'add event' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Име на събитието:</label>
+                {{ form.event_name }}
+            </div>
+            <div class="form-group">
+                <label for="id_date">Дата на събитието:</label>
+                {{ form.date_of_event }}
+            </div>
+            <div class="form-group">
+                <label for="id_location">Местоположение:</label>
+                {{ form.location }}
+            </div>
+            <div class="form-group">
+                <label for="id_location">Детайли за събитието:</label>
+                {{ form.details }}
+            </div>
+            <div class="form-group">
+                <label for="id_location">Такса участие:</label>
+                {{ form.registration_fee }}
+            </div>
+            <div class="form-group">
+                <label for="id_location">Изображение за събитието URL:</label>
+                {{ form.event_image }}
+            </div>
+        <div>
+            {{ form.errors }}
+        </div>
 
+
+            <button class="add-btn" type="submit">Добави</button>
+        </form>
+    </div>
+</div>
+<!-- End Add Event Section -->
 {% endblock %}

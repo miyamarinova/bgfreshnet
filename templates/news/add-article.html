@@ -1,16 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+<style>
+    /* Copy and paste CSS styles from the first template (base.html) */
+    body {
+        background-image: url("{% static 'images/shoppingmesh.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(255, 255, 255, 0.9);
+        min-height: 100vh;
+        position: relative;
+    }
 
-{%  block main_content %}
+</style>
 
-  <!-- Start Add Pet Section-->
-    <div class="edit-delete edit-photo">
+<div class="container">
+    <div class="form-container">
         <h2>Добави статия</h2>
-    <form action="{% url 'add article' %}" method="post">
-            {{ form.as_p }}
-        <button class="add-btn" type="submit">Добави</button>
-        {%  csrf_token %}
-    </form>
+        <form action="{% url 'add article' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_title">Заглавие:</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="id_content">Съдържание:</label>
+                {{ form.content }}
+            </div>
+            <div class="form-group">
+                <label for="id_author">Изображение URL:</label>
+                {{ form.article_image }}
+            </div>
+            <button class="btn-primary" type="submit">Добави</button>
+        </form>
     </div>
-    <!-- End Add Pet Section -->
-
+</div>
 {% endblock %}

@@ -34,6 +34,7 @@ class FreshNetUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         null=False,
     )
 
+
     date_jointed = models.DateTimeField(_("date joined"), default=timezone.now)
 
     is_staff = models.BooleanField(
@@ -60,6 +61,11 @@ class Profile(models.Model):
         blank=True,
         null=True,
         help_text='Short description of you and your products.'
+    )
+    phone_number = models.CharField(
+        max_length=10,
+        blank=True,
+        null=True,
     )
 
     user = models.OneToOneField(

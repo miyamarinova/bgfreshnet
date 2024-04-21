@@ -54,7 +54,7 @@ class ProfileDetailsView(views.DetailView):
 class ProfileUpdateView(views.UpdateView):
     model = Profile
     template_name = 'accounts/edit_user.html'
-    fields = ['profile_picture', 'short_bio']  # Fields to be updated
+    fields = ['profile_picture', 'short_bio', 'phone_number']  # Fields to be updated
 
     def get_object(self, queryset=None):
         # Retrieve the profile object for the logged-in user

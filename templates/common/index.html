@@ -70,7 +70,7 @@
         <div class="container">
           <div class="carousel-caption">
             <h1>Бъди и ти част от българската Свежа мрежа</h1>
-            <a class="btn btn-lg btn-primary" href="{% url 'list producers' %}">Предстоящи събития</a>
+            <a class="btn btn-lg btn-primary" href="{% url 'all events' %}">Предстоящи събития</a>
           </div>
         </div>
       </div>
@@ -118,11 +118,21 @@
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
-
     <!-- Highlights -->
 
     <hr class="featurette-divider">
+      {% for event in events %}
 
-        {% include 'common/highlight.html' %}
+          <div class="row featurette">
+ <div class="col-md-7">
+          <h2 class="featurette-heading">{{ event.event_name }}</h2>
+          <p class="lead"><p class="lead">{{ event.details|truncatechars:100 }}</p>
+          <p><a href="{% url 'details event' pk=event.pk %}" class="btn btn-secondary">Повече информация</a></p>
+     <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500"
+                 src="{{ event.event_image }}">
+            <rect width="100%" height="100%" fill="#eee"/>
 
+    </div>
+    <hr class="featurette-divider">
+{% endfor %}
 {% endblock %}

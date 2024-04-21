@@ -10,6 +10,7 @@ class EventBaseForm(forms.ModelForm):
             "event_name": forms.TextInput(attrs={"placeholder": "Какво е това"}),
             "organised_by": forms.TextInput(attrs={"placeholder": "Кой го организира"}),
             "date_of_event": forms.DateInput(attrs={"placeholder": "Кога "}),
+            "details": forms.Textarea(attrs={"placeholder": "Описание на събитието "}),
             "location": forms.TextInput(attrs={"placeholder": "Къде"}),
 
         }

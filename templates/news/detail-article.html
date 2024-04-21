@@ -1,30 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block main_content %}
+<link rel="stylesheet" href="{% static 'css/article.css' %}">
 
 <div class="container">
-<a href="{% url 'all articles'%}" class="btn btn-sm btn-outline-primary">Към всички новини</a>
-{% if user.is_authenticated and user.is_superuser %}
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="{% url 'edit article' pk=article.pk %}" class="btn btn-sm btn-outline-primary">Редактирай</a>
-                                    </div>
-                                    <div class="col text-right">
-                                        <form action="{% url 'delete article' pk=article.pk %}" method="post">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Изтрий</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-
-    <h1>{{ article.title }}</h1>
-    <img src="{{ article.article_image }}" alt="Article Image">
-    <p>{{ article.content }}</p>
-
+    <div class="article">
+        <div class="article-header">
+            <h1>{{ article.title }}</h1>
+            {% if user.is_authenticated and user.is_superuser %}
+                <div class="article-actions">
+                    <a href="{% url 'edit article' pk=article.pk %}" class="btn btn-sm btn-outline-primary">Редактирай</a>
+                    <form action="{% url 'delete article' pk=article.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Изтрий</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        <div class="article-content">
+            <img src="{{ article.article_image }}" alt="Article Image" class="img-fluid mb-4">
+            <div class="content-body">
+                <p>{{ article.content }}</p>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'all articles' %}" class="btn btn-sm btn-outline-primary mt-4">Към всички новини</a>
 </div>
-
 
 {% endblock %}
