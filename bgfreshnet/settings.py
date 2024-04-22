@@ -6,14 +6,17 @@ from django.urls import reverse_lazy
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', None)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'bgfreshnet.onrender.com',
+    '127.0.0.1',
     'localhost',
-    '127.0.0.1'
 ]
+
+CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
 
 
 # Application definition
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     'bgfreshnet.events',
     'bgfreshnet.news',
     'bootstrap5',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -72,14 +76,13 @@ WSGI_APPLICATION = 'bgfreshnet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'freshnet',
-        'USER': 'postgres',
-        'PASSWORD': 'Pa6murdagi',
-        'HOST': 'localhost',    # Or your database host
-        'PORT': '5432',         # Or your database port
+        'NAME': os.getenv('DB_NAME', 'freshnet'),         # Database name
+        'USER': os.getenv('DB_USER', 'postgres'),        # Database user
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),        # Database password
+        'HOST': os.getenv('DB_HOST', 'localhost'),       # Database host (Render's PostgreSQL host)
+        'PORT': os.getenv('DB_PORT', '5432'),            # Database port (Render's PostgreSQL port)
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -119,6 +122,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / "staticfiles",]
 
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -136,12 +140,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = 'pa6murdagi'  # Your Gmail email password or app password
+EMAIL_HOST_PASSWORD = ''  # Your Gmail email password or app password
 EMAIL_USE_TLS = True
-
-SECURE_HSTS_SECONDS = 31536000
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
