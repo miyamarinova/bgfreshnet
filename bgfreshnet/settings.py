@@ -76,11 +76,11 @@ WSGI_APPLICATION = 'bgfreshnet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'freshnet'),         # Database name
-        'USER': os.getenv('DB_USER', 'postgres'),        # Database user
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),        # Database password
-        'HOST': os.getenv('DB_HOST', 'localhost'),       # Database host (Render's PostgreSQL host)
-        'PORT': os.getenv('DB_PORT', '5432'),            # Database port (Render's PostgreSQL port)
+        'NAME': os.getenv('DB_NAME'),         # Database name
+        'USER': os.getenv('DB_USER'),        # Database user
+        'PASSWORD': os.getenv('DB_PASSWORD'),        # Database password
+        'HOST': os.getenv('DB_HOST'),       # Database host (Render's PostgreSQL host)
+        'PORT': os.getenv('DB_PORT'),            # Database port (Render's PostgreSQL port)
     }
 }
 
