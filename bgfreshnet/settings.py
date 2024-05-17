@@ -10,15 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", 0)
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    '0.0.0.0',
-    'bgfreshnet.onrender.com',
-    '127.0.0.1',
-    'localhost',
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
 
 
 #CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
@@ -125,7 +121,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [BASE_DIR / "staticfiles",]
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+]
 
 STATIC_ROOT = BASE_DIR / "static"
 
@@ -138,7 +136,7 @@ AUTH_USER_MODEL = 'accounts.FreshNetUser'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 LOGGING = {
     'version': 1,
