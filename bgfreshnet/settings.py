@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
@@ -72,16 +72,16 @@ WSGI_APPLICATION = 'bgfreshnet.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# https://docs.djangoprojectgit.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),         # Database name
-        'USER': os.getenv('DB_USER'),        # Database user
-        'PASSWORD': os.getenv('DB_PASSWORD'),        # Database password
-        'HOST': os.getenv('DB_HOST'),       # Database host (Render's PostgreSQL host)
-        'PORT': os.getenv('DB_PORT'),            # Database port (Render's PostgreSQL port)
+        'NAME': os.environ.get('POSTGRES_DB'),         # Database name
+        'USER': os.environ.get('POSTGRES_USER'),        # Database user
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),        # Database password
+        'HOST': os.environ.get('POSTGRES_HOST'),       # Database host (Render's PostgreSQL host)
+        'PORT': os.environ.get('POSTGRES_PORT'),            # Database port (Render's PostgreSQL port)
     }
 }
 
