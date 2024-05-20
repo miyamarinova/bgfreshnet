@@ -6,10 +6,15 @@ from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
-DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
+
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+#CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
+CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
 
 # Application definition
 
