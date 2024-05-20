@@ -5,11 +5,15 @@ from django.conf.urls.static import static
 
 handler403 = 'bgfreshnet.common.views.custom_403_forbidden'
 
-urlpatterns = [
+urlpatterns = ([
     path('admin/', admin.site.urls),
     path('', include('bgfreshnet.common.urls')),
     path('accounts/', include('bgfreshnet.accounts.urls')),
     path('products/', include('bgfreshnet.freshnet_products.urls')),
     path('news/', include('bgfreshnet.news.urls')),
     path('events/', include('bgfreshnet.events.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+])
+
+# Show the Uploaded Images
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
