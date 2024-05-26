@@ -3,7 +3,7 @@
 {% block main_content %}
     <div class="container mt-5">
 
-    {% if user.is_superuser or product.user == user %}
+    {% if product.user == request.user %}
     <hr>
         <a href="{% url 'delete product' product.id %}" type="submit" class="btn btn-danger">Delete Product</a>
         <a href="{% url 'edit product' product.id %}" type="submit" class="btn btn-warning">Edit Product</a>
@@ -29,5 +29,27 @@
             </div>
         </div>
     </div>
+    <div class="comments">
+                {% for comment in object.productcomment_set.all %}
+                    <div class="top">
+                        <div class="userDetails">
+                            <div class="comment-data">
+                                <div class="profilepic">
+                                    <div class="profile_img">
+                                        <div class="image">
+                                            <img src="{% static 'images/person.png' %}" alt="img8">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>
+                                    <!-- User Comment -->
+                                     {{ comment.text }}
+                                </p>
+                            </div>
+                            <span>{{ comment.created_at }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
     
 {% endblock %}

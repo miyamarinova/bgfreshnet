@@ -7,13 +7,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
 #DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
-DEBUG = False
-#ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-#CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
-CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
+DEBUG = True
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+    CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
+else:
+    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+    #ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
+    CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
 
 
 INSTALLED_APPS = [
@@ -67,17 +68,28 @@ WSGI_APPLICATION = 'bgfreshnet.wsgi.application'
 
 # Database
 # https://docs.djangoprojectgit.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('POSTGRES_DB'),
-            'USER': os.environ.get('POSTGRES_USER'),
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-            'HOST': os.environ.get('POSTGRES_HOST'),
-            'PORT': os.environ.get('POSTGRES_PORT'),
-        }
+if DEBUG:
+    DATABASES = {
+    "default": {
+        'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'freshnet',
+                'USER': 'postgres',
+                'PASSWORD': 'Pa6murdagi',
+                'HOST': 'localhost',
+                'PORT': '5432',
     }
+}
+else:
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': os.environ.get('POSTGRES_DB'),
+                'USER': os.environ.get('POSTGRES_USER'),
+                'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+                'HOST': os.environ.get('POSTGRES_HOST'),
+                'PORT': os.environ.get('POSTGRES_PORT'),
+            }
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -127,7 +139,7 @@ AUTH_USER_MODEL = 'accounts.FreshNetUser'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGGING = {
     'version': 1,

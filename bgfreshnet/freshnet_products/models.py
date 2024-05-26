@@ -1,11 +1,16 @@
-
 from django.contrib.auth import get_user_model
+from django.core.validators import BaseValidator
 from django.db import models
 from django.utils.text import slugify
 from bgfreshnet.accounts.models import FreshNetUser, Profile
 
-# Create your models here.
+SIZE_10_MB = 10 * 1024 * 1024
 
+class MaxFileSizeValidator(BaseValidator):
+    def clean(self, x):
+        return x.size
+    def compare(self, file_size, max_size):
+        return max_size < file_size
 
 class FreshNetProduct(models.Model):
     MAX_NAME_LENGTH = 50
@@ -20,9 +25,12 @@ class FreshNetProduct(models.Model):
         null=False,
         blank=False,
     )
-    # TO DO: change this to ImageField
 
-    product_image = models.URLField(
+    product_image = models.ImageField(
+        upload_to='product_photos/',
+        validators=[
+            MaxFileSizeValidator(limit_value=SIZE_10_MB)
+        ],
         null=True,
         blank=True,
     )
@@ -36,9 +44,7 @@ class FreshNetProduct(models.Model):
         max_digits=6,
         decimal_places=2,
     )
-
     date_added = models.DateField(auto_now_add=True)
-
 
     slug = models.SlugField(
         unique=True,
@@ -46,7 +52,6 @@ class FreshNetProduct(models.Model):
         blank=True,
         editable=False,
     )
-
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.slug:

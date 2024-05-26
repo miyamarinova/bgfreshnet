@@ -12,10 +12,11 @@ class ProductBaseForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(attrs={"placeholder": "Име на продукта"}),
             "description": forms.TextInput(attrs={"placeholder": "Кратко описание", "size":50}),
-            "product_image": forms.URLInput(attrs={"placeholder": "Link изображението"}),
-        }
 
+        }
 
 class ProductCreateForm(ProductBaseForm):
     pass
 
+class ProductEditForm(ProductBaseForm):
+    pass

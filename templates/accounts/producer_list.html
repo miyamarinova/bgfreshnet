@@ -2,6 +2,13 @@
 {% load static %}
 {% block main_content %}
 
+     <!-- Start Searchbar Form -->
+    <form class="searchbar" action="{% url 'all producers' %}" method="get" style="float: right; margin-right: 20px; margin-bottom: 20px;"">
+        <input type="text" name="query" placeholder="Търсене..." value="{{ request.GET.query }}">
+        <button type="submit">Търсене</button>
+    </form>
+    <!-- End Searchbar Form -->
+
 <div class="container">
     <h1 class="mb-4">Нашите производители</h1>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">

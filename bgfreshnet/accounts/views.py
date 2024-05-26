@@ -7,10 +7,22 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 from bgfreshnet.accounts.forms import FreshNetUserCreationForm, FreshNetChangeForm
-from bgfreshnet.accounts.models import Profile
+from bgfreshnet.accounts.models import Profile, FreshNetUser
 from bgfreshnet.freshnet_products.models import FreshNetProduct
 
 UserModel = get_user_model()
+
+class AllProducersView(views.ListView):
+    model = FreshNetUser
+    template_name = 'accounts/producer_list.html'
+    context_object_name = 'producers'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('query')
+        if query:
+            queryset = queryset.filter(name_farm__icontains=query)
+        return queryset.exclude(is_superuser=True)
 
 class LogInUserView(auth_views.LoginView):
     template_name = 'accounts/login_user.html'

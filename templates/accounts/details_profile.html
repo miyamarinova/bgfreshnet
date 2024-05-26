@@ -26,11 +26,10 @@
 
         <a href="">
           <a href="{% url 'profile update' %}">
-            <img
-              class="edit-img"
-              src="{% static 'images/pen-solid.svg' %}"
-              alt="edit button"
-            /></a>
+            <img class="edit-img"
+             src="{% static 'images/pen-solid.svg' %}"
+             alt="edit button"/>
+          </a>
         </a>
         <!-- Link to Delete Profile Page -->
         <a href="">
@@ -44,15 +43,6 @@
           <a href="{% url 'create product' %}"><img
               class="edit-img" style="width: 40px; height: 40px;"
               src="{% static 'images/carrot-solid.svg' %}"
-              alt="edit button"
-            /></a>
-        </a>
-        {% endif %}
-        {% if user.is_superuser %}
-        <a href="">
-          <a href="{% url 'delete profile' pk=object.pk %}"><img
-              class="edit-img"
-              src="{% static 'images/trash-solid.svg' %}"
               alt="edit button"
             /></a>
         </a>

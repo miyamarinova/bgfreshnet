@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block main_content %}
-<div class="container">
+       <!-- Start Searchbar Form -->
+    <form class="searchbar" action="{% url 'all products' %}" method="get" style="float: right; margin-right: 20px; margin-bottom: 20px;">
+        {{ search_form.query }}
+        <button type="submit">
+            <img src="{% static 'images/search.svg' %}" height="18" alt="Search">
+        </button>
+    </form>
+    <!-- End Searchbar Form -->
+
+    <div class="container">
     <h1 class="mb-4">Пазар</h1>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
         <!-- Example product cards -->

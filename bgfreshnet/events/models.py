@@ -16,7 +16,7 @@ class Event(models.Model):
     )
 
     date_of_event = models.CharField(
-
+        max_length=100,
         null=False,
         blank=False,
     )

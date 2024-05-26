@@ -1,3 +1,5 @@
+from django.contrib.auth.models import Group
+from django.core.validators import BaseValidator
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.utils.translation import gettext_lazy as _
@@ -6,7 +8,13 @@ from bgfreshnet.accounts.managers import FreshNetUserManager
 
 MAX_FIRST_NAME_LENGTH = 30
 MAX_LAST_NAME_LENGTH = 30
+SIZE_10_MB = 10 * 1024 * 1024
 
+class MaxFileSizeValidator(BaseValidator):
+    def clean(self, x):
+        return x.size
+    def compare(self, file_size, max_size):
+        return max_size < file_size
 class FreshNetUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
         _("email"),
@@ -34,7 +42,6 @@ class FreshNetUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         null=False,
     )
 
-
     date_jointed = models.DateTimeField(_("date joined"), default=timezone.now)
 
     is_staff = models.BooleanField(
@@ -52,11 +59,20 @@ class FreshNetUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 # Create your models here.
 class Profile(models.Model):
 
-    profile_picture = models.URLField(
+    profile_picture = models.ImageField(
+        upload_to='users_profile_photos/',
+        validators=[
+            MaxFileSizeValidator(limit_value=SIZE_10_MB)
+        ],
         null=True,
         blank=True,
     )
 
+    thumbnail = models.ImageField(
+        upload_to='uploads/',
+        blank=True,
+        null=True,
+    )
     short_bio = models.TextField(
         blank=True,
         null=True,
