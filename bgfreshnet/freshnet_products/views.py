@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
-from django.shortcuts import render, redirect
+from django.db.models import Avg
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic as views
 
 from bgfreshnet.common.forms import ProductSearchForm
+from bgfreshnet.common.models import ProductRating
 from bgfreshnet.freshnet_products.decorators import admin_group_required, has_delete_permission
-from bgfreshnet.freshnet_products.forms import ProductCreateForm, ProductBaseForm, ProductEditForm
+from bgfreshnet.freshnet_products.forms import ProductCreateForm, ProductBaseForm, ProductEditForm, RatingForm
 from bgfreshnet.freshnet_products.models import FreshNetProduct
 from django.utils.decorators import method_decorator
 
@@ -52,6 +54,25 @@ class ProductDetailsView(views.DetailView):
     template_name = 'products/product-details.html'  # Specify the template for product details
     context_object_name = 'product'  # Specify the context variable name to use in the template
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        product = self.object
+
+        # Get average rating
+        context['average_rating'] = ProductRating.objects.filter(product=product).aggregate(Avg('rating'))['rating__avg'] or 0
+        context['rating_count'] = ProductRating.objects.filter(product=product).count()
+        # Add the rating form
+        context['form'] = RatingForm()
+
+        if user.is_authenticated:
+            # Check if the user has rated this product
+            context['has_rated'] = ProductRating.objects.filter(user=user, product=product).exists()
+        else:
+            context['has_rated'] = False
+
+        return context
+
 class EditProductView(views.UpdateView):
     model = FreshNetProduct
     form_class = ProductEditForm
@@ -79,3 +100,23 @@ class DeleteProductView(views.DeleteView):
             messages.error(request, 'You do not have permission to delete this product.')
             return redirect('product-details', pk=product.pk)
         return super().dispatch(request, *args, **kwargs)
+
+
+@login_required
+def rate_product(request, product_id):
+    product = get_object_or_404(FreshNetProduct, id=product_id)
+
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.cleaned_data['rating']
+            ProductRating.objects.update_or_create(
+                user=request.user,
+                product=product,
+                defaults={'rating': rating},
+            )
+            return redirect('product-details', pk=product.id)
+    else:
+        form = RatingForm()
+
+    return render(request, 'products/product-details.html', {'form': form, 'product': product})

@@ -20,3 +20,11 @@ class ProductCreateForm(ProductBaseForm):
 
 class ProductEditForm(ProductBaseForm):
     pass
+
+class RatingForm(forms.Form):
+    rating = forms.IntegerField(
+        min_value=1,
+        max_value=5,
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+        label='Оценете продукта (1-5)'
+    )

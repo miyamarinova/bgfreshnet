@@ -2,7 +2,6 @@
 {% load static %}
 {% block main_content %}
     <div class="container mt-5">
-
     {% if product.user == request.user %}
     <hr>
         <a href="{% url 'delete product' product.id %}" type="submit" class="btn btn-danger">Delete Product</a>
@@ -21,35 +20,103 @@
                 <p>{{ product.description }}</p>
                 <p>Price: ${{ product.price }}</p>
                 {% if request.user.name_farm == product.user.name_farm %}
-                    <p>Added by: Me </p>
+                    <p>Добавено от: Мой продукт </p>
                 {% else %}
-                    <p>Added by: {{ product.user.name_farm }}</p>
+                    <p>Добавено от: {{ product.user.name_farm }}</p>
                 {% endif %}
                 <!-- Add more details as needed -->
             </div>
         </div>
     </div>
-    <div class="comments">
-                {% for comment in object.productcomment_set.all %}
-                    <div class="top">
-                        <div class="userDetails">
-                            <div class="comment-data">
-                                <div class="profilepic">
-                                    <div class="profile_img">
-                                        <div class="image">
-                                            <img src="{% static 'images/person.png' %}" alt="img8">
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>
-                                    <!-- User Comment -->
-                                     {{ comment.text }}
-                                </p>
+  <!-- Rating Section -->
+<div class="container mt-5">
+    <h2>Оцени продукта</h2>
+    <div class="average-rating">
+        <p>Средна оценка: {{ average_rating|default:0 }} / {{ rating_count }}</p>
+    </div>
+
+    {% if request.user.is_authenticated and request.user != product.user %}
+        {% if not has_rated %}
+            <form method="post" action="{% url 'rate_product' product.id %}">
+                {% csrf_token %}
+                <div class="star-rating">
+                    {% for i in "12345" %}
+                        <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+                        <label for="star{{ i }}" title="{{ i }} stars" class="star">
+                            <span class="fa fa-star"></span>
+                        </label>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary">Оцени</button>
+            </form>
+        {% else %}
+            <p>Вече сте оценили продукта.</p>
+        {% endif %}
+    {% else %}
+        {% if request.user != product.user %}
+            <p>Please <a href="{% url 'login user' %}">Влезте в профила си,</a> зада оцените продукта.</p>
+        {% endif %}
+        {% endif %}
+</div>
+<!-- Comments Section -->
+<div class="comments">
+    {% for comment in product.productcomment_set.all %}
+        <div class="top">
+            <div class="userDetails">
+                <div class="comment-data">
+                    <div class="profilepic">
+                        <div class="profile_img">
+                            <div class="image">
+                                <img src="{% static 'images/person.png' %}" alt="img8">
                             </div>
-                            <span>{{ comment.created_at }}</span>
                         </div>
                     </div>
-                {% endfor %}
+                    <p>
+                        <!-- User Comment -->
+                         {{ comment.text }}
+                    </p>
+                </div>
+                <span>{{ comment.created_at }}</span>
             </div>
-    
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
+
+<style>
+.checked {
+    color: orange;
+}
+
+.star-rating {
+    direction: rtl;
+    display: inline-block;
+    unicode-bidi: bidi-override;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    font-size: 2em;
+    padding: 0;
+    cursor: pointer;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type="radio"]:checked ~ label {
+    color: orange;
+}
+</style>

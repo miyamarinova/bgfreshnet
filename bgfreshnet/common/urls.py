@@ -1,6 +1,6 @@
 from django.urls import path
 
-from bgfreshnet.common.views import IndexView, AboutUsView, contact,thanks, like_product,comment_product,search_product
+from bgfreshnet.common.views import IndexView, AboutUsView, contact,thanks, like_product,comment_product
 from . import views
 
 urlpatterns = [
@@ -9,7 +9,7 @@ urlpatterns = [
 
     path('contactus/', contact, name='contact us'),
     path('contact/', thanks, name='thanks'),
-    path('product_like/<int:pk>/', like_product, name='like product'),
-    path('product_comment/<int:pk>/', comment_product, name='comment product'),
+
+
 
 ]
