@@ -8,18 +8,12 @@ class ProducerSearchForm(forms.Form):
     query = forms.CharField(label='Търси производител', max_length=50)
 
 class ContactForm(forms.Form):
-    contact_name = forms.CharField(
-        required=True,
-        label="Name"
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={"placeholder": "Твоят e-mail"})
     )
-    contact_email = forms.EmailField(
-        required=True,
-        label="Email"
-    )
-    content = forms.CharField(
-        required=True,
-        widget=forms.Textarea,
-        label="Message"
+    subject = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Tema"}))
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={"placeholder": "Twoqeto syob]enie"})
     )
 
 class CommentForm(forms.ModelForm):
