@@ -166,18 +166,3 @@ LOGGING = {
 
 
 
-# Mail config
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 25
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'  # This is literally the string 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-NOTIFY_EMAIL = 'mariayoana.marinova@gmail.com'  # The email where you want to receive contact form submissions
-EMAIL_USE_SSL = False  # Set to True if your SMTP server requires SSL
-
-# Default email address for sending emails
-DEFAULT_FROM_EMAIL = 'no-reply@example.com'
-
-# Email address where you want to receive contact form submissions
-CONTACT_EMAIL = 'mariayoana.marinova@gmail.com'

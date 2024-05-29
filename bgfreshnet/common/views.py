@@ -54,27 +54,7 @@ def search_product(request):
     return render(request, 'common/search-result.html', {'form': form, 'products': products})
 
 def contact(request):
-    email_sent = False
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['subject']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-
-            # Send email notification to your email address
-            send_mail(
-                subject=f"New Contact Form Submission from {name}",
-                message=f"You have received a new message from {name} ({email}): \n\n{message}",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
-            )
-            email_sent=True
-            return render(request, 'common/thanks.html')
-    else:
-        form = ContactForm()
-
-    return render(request, 'common/contact-us.html', {'form': form, 'email_sent':email_sent})
+    return render(request, 'common/contact-us.html')
 
 def custom_403_forbidden(request, exception):
     return render(request, 'common/403_forbidden.html', status=403)
