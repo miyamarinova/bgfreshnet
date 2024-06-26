@@ -71,23 +71,23 @@ WSGI_APPLICATION = 'bgfreshnet.wsgi.application'
 # https://docs.djangoprojectgit.com/en/5.0/ref/settings/#databases
 if DEBUG:
     DATABASES = {
-    "default": {
-        'ENGINE': 'django.db.backends.postgresql',
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
                 'NAME': 'freshnet',
-                'USER': 'postgres',
+                'USER': 'mysuperuser',
                 'PASSWORD': 'Pa6murdagi',
-                'HOST': 'localhost',
+                'HOST': 'bgfreshnet.c7ay4482mrsk.us-east-1.rds.amazonaws.com',
                 'PORT': '5432',
-    }
-}
+            }
+        }
 else:
     DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql',
                 'NAME': 'freshnet',
-                'USER': 'postgres',
+                'USER': 'mysuperuser',
                 'PASSWORD': 'Pa6murdagi',
-                'HOST': 'localhost',
+                'HOST': 'bgfreshnet.c7ay4482mrsk.us-east-1.rds.amazonaws.com',
                 'PORT': '5432',
             }
         }
